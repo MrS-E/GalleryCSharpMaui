@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Gallery.MainPage">
+    <Grid>
+        <BoxView Color="CornflowerBlue" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+            <BoxView.GestureRecognizers>
+                <SwipeGestureRecognizer Direction="Down" Swiped="SwipedDown"/>
+                <SwipeGestureRecognizer Direction="Up" Swiped="SwipedUp"/>
+                <SwipeGestureRecognizer Direction="Left" Swiped="SwipedLeft"/>
+                <SwipeGestureRecognizer Direction="Right" Swiped="SwipedRight"/>
+            </BoxView.GestureRecognizers>
+        </BoxView>
+        <Image x:Name="BGImage" Aspect="AspectFill" />
+        <BoxView BackgroundColor="Black" Opacity=".75"/>
+        <Image x:Name="MainImage"/>
+
+        <AbsoluteLayout VerticalOptions="Center" HorizontalOptions="End" BackgroundColor="Transparent" Margin="0,0,10,0">
+            <StackLayout Spacing="10" >
+                <ImageButton Source="love.png" WidthRequest="50" HeightRequest="50" Clicked="Liked"/>
+                <ImageButton Source="add.png" WidthRequest="50" HeightRequest="50" Clicked="Added"/>
+            </StackLayout>
+        </AbsoluteLayout>
+
+        <AbsoluteLayout x:Name="OverlayLayout" BackgroundColor="#80000000" IsVisible="False" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+            <Grid BackgroundColor="White" AbsoluteLayout.LayoutBounds="1, 0, 0.7, 1" AbsoluteLayout.LayoutFlags="All" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+                <Label Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" HorizontalTextAlignment="Center" FontSize="50">Details</Label>
+                <Label Grid.Column="0" Grid.Row="1" FontSize="20" TextDecorations="Underline">Title:</Label>
+                <Label Grid.Column="1" Grid.Row="1" FontSize="20" x:Name="LabelTitle"/>
+                <Label Grid.Column="0" Grid.Row="2" FontSize="20" TextDecorations="Underline">Tags:</Label>
+                <Label Grid.Column="1" Grid.Row="2" FontSize="20" x:Name="LabelTag"/>
+                <Label Grid.Column="0" Grid.Row="3" FontSize="20" TextDecorations="Underline">Description:</Label>
+                <Label Grid.Column="1" Grid.Row="3" FontSize="20" x:Name="LabelDesc"/>
+                <Label Grid.Column="0" Grid.Row="4" FontSize="20" TextDecorations="Underline">Uploaded at:</Label>
+                <Label Grid.Column="1" Grid.Row="4" FontSize="20" x:Name="LabelCreated"/>
+            </Grid>
+        </AbsoluteLayout>
+    </Grid>
+        
+</ContentPage>
