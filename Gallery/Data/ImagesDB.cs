@@ -1,5 +1,6 @@
 ﻿using SQLite;
 using Gallery.Models;
+using System.Diagnostics;
 
 namespace Gallery.Data
 {
@@ -15,12 +16,19 @@ namespace Gallery.Data
 
         public void Init()
         {
-            if(!File.Exists(dbPath)) 
-            { 
-                File.Create(dbPath);
+            try
+            {
+                if (!File.Exists(dbPath))
+                {
+                    File.Create(dbPath);
+                }
+                conn = new SQLiteConnection(dbPath);
+                conn.CreateTable<Models.Image>();
             }
-            conn = new SQLiteConnection(dbPath);
-            conn.CreateTable<Models.Image>();
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
 
         public List<Models.Image> GetImages()

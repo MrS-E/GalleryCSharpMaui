@@ -19,7 +19,7 @@ namespace Gallery
 #if DEBUG
 		builder.Logging.AddDebug();
 #endif
-            builder.Services.AddSingleton(s => ActivatorUtilities.CreateInstance<ImagesDB>(s, "./"));
+            builder.Services.AddSingleton(s => ActivatorUtilities.CreateInstance<ImagesDB>(s, Path.Combine(FileSystem.AppDataDirectory, "data.db")));
 
             return builder.Build();
         }

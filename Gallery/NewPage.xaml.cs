@@ -1,4 +1,5 @@
 using System.Diagnostics;
+using Android.App;
 using Gallery.Models;
 
 namespace Gallery;
@@ -45,16 +46,26 @@ public partial class NewPage : ContentPage
             Debug.WriteLine(ex.Message);
         }
     }
-    void Upladed(object sender, EventArgs e)
+    async void Upladed(object sender, EventArgs e)
     {
-        App.ImagesDB.Add(new Models.Image
+        if (base64 != null)
         {
-            uri = base64 != null?base64:"",
-            name = EName.Text,
-            tags = ETags.Text.Split('#'),
-            desc = EDesc.Text,
-            createdAt = DateTime.Today.ToString()
-        }) ;
+            App.ImagesDB.Add(new Models.Image
+            {
+                uri = base64,
+                name = EName.Text != null ? EName.Text : "",
+                tags = ETags.Text != null ? string.Join(';', ETags.Text.Replace(" ", "").Split('#')) : "",
+                desc = EDesc.Text != null ? EDesc.Text : "",
+                createdAt = DateTime.Today.ToString()
+
+            });
+            App.Current.MainPage = new NavigationPage(new MainPage());
+
+        }
+        else
+        {
+            await DisplayAlert("No Image dedected", "Please upload a image", "OK");
+        }
     }
-    
+
 }
