@@ -15,7 +15,7 @@
 		<ApplicationTitle>Gallery</ApplicationTitle>
 
 		<!-- App Identifier -->
-		<ApplicationId>com.companyname.gallery</ApplicationId>
+		<ApplicationId>com.stix.swipegallery</ApplicationId>
 		<ApplicationIdGuid>4259f0bb-280b-4095-9faa-0cb9e50450c0</ApplicationIdGuid>
 
 		<!-- Versions -->
@@ -32,10 +32,10 @@
 
 	<ItemGroup>
 		<!-- App Icon -->
-		<MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#512BD4" />
+		<MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#ffffff" />
 
 		<!-- Splash Screen -->
-		<MauiSplashScreen Include="Resources\Splash\splash.svg" Color="#512BD4" BaseSize="128,128" />
+		<MauiSplashScreen Include="Resources\Splash\splash.svg" Color="#512BD4" BaseSize="128,128"/>
 
 		<!-- Images -->
 		<MauiImage Include="Resources\Images\*" />
