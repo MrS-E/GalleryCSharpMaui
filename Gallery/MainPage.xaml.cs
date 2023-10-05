@@ -15,7 +15,10 @@ namespace Gallery
 
             SetupShaker();
 
-            images = App.ImagesDB.GetImages().ToArray();
+            ImagesDB d = new ImagesDB(App.db_path);
+            d.Init();
+            images = d.GetImages().ToArray();
+            d.Close();
 
             if (images.Length > 0)
             {
@@ -37,7 +40,7 @@ namespace Gallery
         void SwipedDown(object sender, SwipedEventArgs e)
         {
             Debug.WriteLine("down");
-            if (!OverlayLayout.IsVisible && images.Length>0)
+            if (!OverlayLayout.IsVisible && images.Length > 0)
             {
                 if (count < images.Length - 1)
                 {
@@ -90,7 +93,7 @@ namespace Gallery
             await DisplayAlert("Liked", "Thx for the like.", "OK");
 
         }
-        async void Added(object sender, EventArgs e)
+        void Added(object sender, EventArgs e)
         {
             App.Current.MainPage = new NavigationPage(new NewPage());
         }
@@ -127,6 +130,47 @@ namespace Gallery
             {
                 Accelerometer.ShakeDetected += Shaken;
                 Accelerometer.Start(SensorSpeed.Default);
+            }
+        }
+        async void Selected(object sender, EventArgs e)
+        {
+            try
+            {
+                var result = await FilePicker.PickAsync(new PickOptions
+                {
+                    PickerTitle = "Select SQLite Database File"
+                });
+
+                if (result != null)
+                {
+                    App.db_path = result.FullPath;
+                    count = 0;
+                    ImagesDB d = new ImagesDB(App.db_path);
+                    d.Init();
+                    images = d.GetImages().ToArray();
+                    d.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
+        }
+
+        async void Shared(object sender, EventArgs e)
+        {
+            try
+            {
+                var file = new FileInfo(App.db_path);
+                await Share.RequestAsync(new ShareFileRequest
+                {
+                    Title = "Share SQLite Database File",
+                    File = new ShareFile(App.db_path)
+                });
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
             }
         }
     }

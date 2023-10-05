@@ -1,16 +1,15 @@
+using Gallery.Data;
 using System.Diagnostics;
-using Android.App;
-using Gallery.Models;
 
 namespace Gallery;
 
 public partial class NewPage : ContentPage
 {
     private string base64;
-	public NewPage()
-	{
-		InitializeComponent();
-	}
+    public NewPage()
+    {
+        InitializeComponent();
+    }
 
     protected override bool OnBackButtonPressed()
     {
@@ -50,7 +49,9 @@ public partial class NewPage : ContentPage
     {
         if (base64 != null)
         {
-            App.ImagesDB.Add(new Models.Image
+            ImagesDB d = new ImagesDB(App.db_path);
+            d.Init();
+            d.Add(new Models.Image
             {
                 uri = base64,
                 name = EName.Text != null ? EName.Text : "",
@@ -59,6 +60,7 @@ public partial class NewPage : ContentPage
                 createdAt = DateTime.Today.ToString()
 
             });
+            d.Close();
             App.Current.MainPage = new NavigationPage(new MainPage());
 
         }

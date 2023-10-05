@@ -1,5 +1,4 @@
-﻿using Gallery.Data;
-using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.Logging;
 
 namespace Gallery
 {
@@ -17,9 +16,9 @@ namespace Gallery
                 });
 
 #if DEBUG
-		builder.Logging.AddDebug();
+            builder.Logging.AddDebug();
 #endif
-            builder.Services.AddSingleton(s => ActivatorUtilities.CreateInstance<ImagesDB>(s, Path.Combine(FileSystem.AppDataDirectory, "data.db")));
+            //builder.Services.AddSingleton(s => ActivatorUtilities.CreateInstance<ImagesDB>(s, Path.Combine(FileSystem.AppDataDirectory, "data.db")));
 
             return builder.Build();
         }

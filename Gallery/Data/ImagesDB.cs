@@ -1,5 +1,4 @@
 ﻿using SQLite;
-using Gallery.Models;
 using System.Diagnostics;
 
 namespace Gallery.Data
@@ -14,7 +13,7 @@ namespace Gallery.Data
             this.dbPath = dbPath;
         }
 
-        public void Init()
+        public bool Init()
         {
             try
             {
@@ -24,29 +23,33 @@ namespace Gallery.Data
                 }
                 conn = new SQLiteConnection(dbPath);
                 conn.CreateTable<Models.Image>();
+                return true;
             }
             catch (Exception ex)
             {
                 Debug.WriteLine(ex);
+                return false;
             }
         }
 
         public List<Models.Image> GetImages()
         {
-            Init();
             return conn.Table<Models.Image>().ToList();
         }
 
         public void Add(Models.Image image)
         {
-            Init();
             conn.Insert(image);
         }
 
         public void Delete(int id)
         {
-            Init();
-            conn.Delete(new {id = id});
+            conn.Delete(new { id = id });
+        }
+
+        public void Close()
+        {
+            conn.Close();
         }
     }
 }

@@ -17,8 +17,10 @@
 
         <AbsoluteLayout VerticalOptions="Center" HorizontalOptions="End" BackgroundColor="Transparent" Margin="0,0,10,0">
             <StackLayout Spacing="10" >
-                <ImageButton Source="love.png" WidthRequest="50" HeightRequest="50" Clicked="Liked"/>
-                <ImageButton Source="add.png" WidthRequest="50" HeightRequest="50" Clicked="Added"/>
+                <ImageButton Source="loveicon.png" WidthRequest="50" HeightRequest="50" Clicked="Liked"/>
+                <ImageButton Source="addicon.png" WidthRequest="50" HeightRequest="50" Clicked="Added"/>
+                <ImageButton Source="iicon.png" WidthRequest="50" HeightRequest="50" Clicked="Selected"/>
+                <ImageButton Source="eicon.png" WidthRequest="50" HeightRequest="50" Clicked="Shared"/>
             </StackLayout>
         </AbsoluteLayout>
 
